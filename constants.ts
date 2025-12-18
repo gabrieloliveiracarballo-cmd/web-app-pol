@@ -1,14 +1,17 @@
 import { ScreenType, StoryScreen } from './types';
 
-// Using picsum seeds to simulate distinct character states
-// In a real scenario, these would be local imports like: import polTriste from './assets/pol_triste.png'
+// Helper para obtener la ruta correcta de las imágenes (funciona en local y GitHub Pages)
+const getImg = (filename: string) => `${import.meta.env.BASE_URL}images/${filename}`;
+
+// 📸 AQUÍ ES DONDE TIENES QUE PONER LOS NOMBRES DE TUS FOTOS
+// Asegúrate de que los archivos estén en la carpeta public/images/
 const IMAGES = {
-  TRISTE: "https://picsum.photos/seed/pol_triste/400/400", // Sad
-  FELIZ: "https://picsum.photos/seed/pol_feliz/400/400",   // Happy/Cycling
-  SONADOR: "https://picsum.photos/seed/pol_sonador/400/400", // Dreaming
-  VIDENTE: "https://picsum.photos/seed/vidente_pedro/400/400", // Mystic
-  ASUSTADO: "https://picsum.photos/seed/pol_asustado/400/400", // Scared/Party
-  ESPERANZADO: "https://picsum.photos/seed/pol_esperanzado/400/400", // Hopeful
+  TRISTE: getImg("Pol triste brazos rodilla.jpg"),       // Foto para cuando está triste
+  FELIZ: getImg("tu_foto_feliz.jpg"),         // Foto para cuando está feliz/bici
+  SONADOR: getImg("Pol celtista.jpg"),     // Foto soñando
+  VIDENTE: getImg("tu_foto_vidente.jpg"),     // Foto del vidente
+  ASUSTADO: getImg("tu_foto_asustado.jpg"),   // Foto asustado/fiesta
+  ESPERANZADO: getImg("tu_foto_esperanzado.jpg"), // Foto final esperanzado
 };
 
 export const STORY_DATA: StoryScreen[] = [
