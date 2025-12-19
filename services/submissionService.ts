@@ -1,19 +1,31 @@
 import { SubmissionData } from '../types';
 
 export const submitInstagramHandle = async (handle: string): Promise<boolean> => {
-  // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 1500));
-
-  const data: SubmissionData = {
-    instagramHandle: handle,
+  const payload = {
+    instagram: handle,
     timestamp: new Date().toISOString()
   };
 
-  // In a real app, integrate EmailJS or Firebase here.
-  // Example for EmailJS:
-  // emailjs.send('service_id', 'template_id', { instagram: handle }, 'user_id');
-  
-  console.log("Submitting to backend:", data);
-  
-  return true; // Return success
+  try {
+    // Send data to the webhook
+    const response = await fetch('https://app.next-barber.com/webhook/pol-ligon', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      console.error("Error submitting to webhook:", response.status, response.statusText);
+      // Even if the webhook fails, we might want to show success to the user 
+      // or handle it differently. For now, let's return false on failure.
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Network error submitting to webhook:", error);
+    return false;
+  }
 };
